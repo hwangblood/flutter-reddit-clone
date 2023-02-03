@@ -1,5 +1,5 @@
 name: reddit_clone
-description: A new Flutter project.
+description: A Social Media application with Flutter as frontend framework and Firebase as Backend!
 publish_to: "none"
 
 version: 1.0.0+1
