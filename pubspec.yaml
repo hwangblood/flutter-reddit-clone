@@ -1,5 +1,6 @@
 name: reddit_clone
-description: A Social Media application with Flutter as frontend framework and Firebase as Backend!
+description: A Social Media application with Flutter as frontend framework and
+  Firebase as Backend!
 publish_to: "none"
 
 version: 1.0.0+1
@@ -8,9 +9,15 @@ environment:
   sdk: ">=2.18.6 <3.0.0"
 
 dependencies:
+  cloud_firestore: ^4.4.5
   cupertino_icons: ^1.0.2
+  firebase_auth: ^4.3.0
+  firebase_core: ^2.8.0
+  firebase_storage: ^11.0.16
   flutter:
     sdk: flutter
+  flutter_riverpod: ^2.3.2
+  google_sign_in: ^6.0.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0
