@@ -27,6 +27,8 @@ class AuthRepository {
         FirebaseConstants.usersCollection,
       );
 
+  Stream<User?> get authStateChange => _auth.authStateChanges();
+
   AuthRepository({
     required FirebaseFirestore firestore,
     required FirebaseAuth auth,

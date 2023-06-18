@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:reddit_clone/core/type_defs.dart';
@@ -8,7 +9,7 @@ import 'package:reddit_clone/features/auth/repository/auth_repository.dart';
 import 'package:reddit_clone/models/user_model.dart';
 
 final userProvider = StateProvider<UserModel?>(
-  (ref) => null,
+  (ref) => null, // default no any user
 );
 
 final authControllerProvider = StateNotifierProvider<AuthController, IsLoading>(
@@ -17,6 +18,17 @@ final authControllerProvider = StateNotifierProvider<AuthController, IsLoading>(
     ref: ref,
   ),
 );
+
+final authStateChangeProvider = StreamProvider<User?>((ref) {
+  final authController = ref.watch(authControllerProvider.notifier);
+  return authController.authStateChage;
+});
+
+final getUserDataProvider =
+    StreamProvider.family<UserModel, String>((ref, String uid) {
+  final authController = ref.watch(authControllerProvider.notifier);
+  return authController.getUserData(uid);
+});
 
 class AuthController extends StateNotifier<IsLoading> {
   final AuthRepository _authRepository;
@@ -29,6 +41,8 @@ class AuthController extends StateNotifier<IsLoading> {
         _ref = ref,
         super(false);
 
+  Stream<User?> get authStateChage => _authRepository.authStateChange;
+
   Future<void> signInWithGoogle(BuildContext context) async {
     state = true;
     final user = await _authRepository.signInWithGoogle();
@@ -40,5 +54,9 @@ class AuthController extends StateNotifier<IsLoading> {
             (_) => userModel,
           ),
     );
+  }
+
+  Stream<UserModel> getUserData(String uid) {
+    return _authRepository.getUserData(uid);
   }
 }
