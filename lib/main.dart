@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/screens/login_screen.dart';
 import 'package:reddit_clone/theme/pallete.dart';
 
+// ignore: always_use_package_imports
 import 'firebase_options.dart';
 
 Future<void> main() async {

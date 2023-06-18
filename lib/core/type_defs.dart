@@ -8,3 +8,6 @@ import 'package:reddit_clone/core/failure.dart';
 typedef FutureEither<T> = Future<Either<Failure, T>>;
 
 typedef FutureEitherVoid = FutureEither<void>;
+
+/// IsLloading , true or false
+typedef IsLoading = bool;
