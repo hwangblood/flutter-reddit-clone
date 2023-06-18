@@ -6,6 +6,9 @@ class CommunityListDrawer extends ConsumerWidget {
   const CommunityListDrawer({super.key});
 
   void navigateToCreateCommunity(BuildContext context) {
+    // close drawer before navigating
+    Scaffold.of(context).closeDrawer();
+
     Routemaster.of(context).push('/create-community');
   }
 
@@ -13,7 +16,7 @@ class CommunityListDrawer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
       child: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
             ListTile(
               title: const Text('Create a community'),
