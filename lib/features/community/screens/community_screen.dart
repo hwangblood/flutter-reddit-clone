@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
+
 import 'package:reddit_clone/core/common/error_text.dart';
 import 'package:reddit_clone/core/common/loader.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
@@ -15,6 +18,10 @@ class CommunityScreen extends ConsumerWidget {
     super.key,
     required this.name,
   });
+
+  void navigateToModTools(BuildContext context) {
+    Routemaster.of(context).push('/mod-tools/$name');
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -67,7 +74,7 @@ class CommunityScreen extends ConsumerWidget {
                               community.mods.contains(user.uid)
                                   ? OutlinedButton(
                                       onPressed: () {
-                                        // TODO: on click mod tool of community
+                                        navigateToModTools(context);
                                       },
                                       style: OutlinedButton.styleFrom(
                                         padding: const EdgeInsets.symmetric(
