@@ -24,6 +24,15 @@ final getCommunityByNameProvider =
       ref.watch(communityControllerProvider.notifier).getCommunityByName(name),
 );
 
+final searchCommunityProvider =
+    StreamProvider.family<List<CommunityModel>, String>((
+  ref,
+  searchTerm,
+) {
+  final communityController = ref.watch(communityControllerProvider.notifier);
+  return communityController.searchCommunity(searchTerm);
+});
+
 final communityControllerProvider =
     StateNotifierProvider<CommunityController, IsLoading>(
   (ref) => CommunityController(
@@ -125,5 +134,9 @@ class CommunityController extends StateNotifier<IsLoading> {
       (l) => SnackBarUtil.showSnackBar(context, message: l.message),
       (r) => Routemaster.of(context).pop(),
     );
+  }
+
+  Stream<List<CommunityModel>> searchCommunity(String searchTerm) {
+    return _communityRepository.searchCommunity(searchTerm);
   }
 }
