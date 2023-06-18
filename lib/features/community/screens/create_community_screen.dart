@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:reddit_clone/core/common/loader.dart';
 import 'package:reddit_clone/features/community/controller/community_controller.dart';
 

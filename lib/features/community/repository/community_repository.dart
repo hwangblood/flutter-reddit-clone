@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
+
 import 'package:reddit_clone/core/constants/firebase_constants.dart';
 import 'package:reddit_clone/core/failure.dart';
 import 'package:reddit_clone/core/providers/firebase_providers.dart';
@@ -39,6 +40,23 @@ class CommunityRepository {
     } catch (e) {
       return left(Failure(e.toString()));
     }
+  }
+
+  Stream<List<CommunityModel>> getUserCommunities(String uid) {
+    return _communities
+        .where('members', arrayContains: uid)
+        .snapshots()
+        .map((snapshot) {
+      List<CommunityModel> communities = [];
+      for (var doc in snapshot.docs) {
+        communities.add(
+          CommunityModel.fromMap(
+            doc.data() as Map<String, dynamic>,
+          ),
+        );
+      }
+      return communities;
+    });
   }
 
   CollectionReference get _communities =>

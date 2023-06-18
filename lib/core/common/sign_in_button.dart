@@ -24,6 +24,7 @@ class SignInButton extends ConsumerWidget {
           style: TextStyle(fontSize: 18),
         ),
         style: ElevatedButton.styleFrom(
+          foregroundColor: Pallete.whiteColor,
           backgroundColor: Pallete.greyColor,
           minimumSize: const Size(double.infinity, 50),
           shape: RoundedRectangleBorder(
