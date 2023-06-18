@@ -14,10 +14,6 @@ import 'package:reddit_clone/theme/pallete.dart';
 
 import 'firebase_options.dart';
 
-// ignore: always_use_package_imports
-
-// ignore: always_use_package_imports
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
