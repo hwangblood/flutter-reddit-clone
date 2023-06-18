@@ -5,6 +5,10 @@ import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 class ProfileDrawer extends ConsumerWidget {
   const ProfileDrawer({super.key});
 
+  void logOut(WidgetRef ref) {
+    ref.read(authControllerProvider.notifier).logOut();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
@@ -40,9 +44,7 @@ class ProfileDrawer extends ConsumerWidget {
                 Icons.logout,
                 color: Theme.of(context).primaryColor,
               ),
-              onTap: () {
-                // TODO: log the user out
-              },
+              onTap: () => logOut(ref),
             ),
             Switch.adaptive(
               value: true,
