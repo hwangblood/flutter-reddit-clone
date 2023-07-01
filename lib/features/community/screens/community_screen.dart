@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/models/community_model.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:reddit_clone/core/common/error_text.dart';
@@ -21,6 +22,19 @@ class CommunityScreen extends ConsumerWidget {
 
   void navigateToModTools(BuildContext context) {
     Routemaster.of(context).push('/mod-tools/$name');
+  }
+
+  void joinOrLeaveCommunity(
+    WidgetRef ref,
+    BuildContext context,
+    CommunityModel community,
+  ) {
+    final communityController = ref.read(communityControllerProvider.notifier);
+
+    communityController.joinCommunity(
+      context,
+      community,
+    );
   }
 
   @override
@@ -89,7 +103,11 @@ class CommunityScreen extends ConsumerWidget {
                                     )
                                   : OutlinedButton(
                                       onPressed: () {
-                                        // TODO: join or dis-join a community
+                                        joinOrLeaveCommunity(
+                                          ref,
+                                          context,
+                                          community,
+                                        );
                                       },
                                       style: OutlinedButton.styleFrom(
                                         padding: const EdgeInsets.symmetric(

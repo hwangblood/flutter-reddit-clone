@@ -84,6 +84,37 @@ class CommunityController extends StateNotifier<IsLoading> {
     );
   }
 
+  Future<void> joinCommunity(
+    BuildContext context,
+    CommunityModel community,
+  ) async {
+    final user = _ref.read(userProvider)!;
+
+    EitherVoid res;
+    if (community.members.contains(user.uid)) {
+      res = await _communityRepository.leaveCommunity(community.name, user.uid);
+    } else {
+      res = await _communityRepository.joinCommunity(community.name, user.uid);
+    }
+
+    res.fold(
+      (l) => SnackBarUtil.showSnackBar(context, message: l.message),
+      (r) {
+        if (community.members.contains(user.uid)) {
+          SnackBarUtil.showSnackBar(
+            context,
+            message: 'Community left successfully',
+          );
+        } else {
+          SnackBarUtil.showSnackBar(
+            context,
+            message: 'Community joined successfully',
+          );
+        }
+      },
+    );
+  }
+
   Stream<List<CommunityModel>> getUserCommunities() {
     final uid = _ref.read(userProvider)!.uid;
     return _communityRepository.getUserCommunities(uid);

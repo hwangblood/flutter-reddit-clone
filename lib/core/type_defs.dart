@@ -9,5 +9,7 @@ typedef FutureEither<T> = Future<Either<Failure, T>>;
 
 typedef FutureEitherVoid = FutureEither<void>;
 
+typedef EitherVoid = Either<Failure, void>;
+
 /// IsLloading , true or false
 typedef IsLoading = bool;
